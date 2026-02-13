@@ -18,7 +18,55 @@
             color: #ffffff;
             min-height: 100vh;
             padding: 20px;
+            transition: background 0.3s ease; 
         }
+
+      
+       
+     
+body.light {
+    
+    background: linear-gradient(180deg, #ced4da 0%, #e9ecef 50%, #ffffff 100%) !important;
+    color: #1a202c !important;
+}
+
+body.light .section {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: #2d3748 !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+}
+
+
+body.light h2, 
+body.light .feature-title, 
+body.light .list-item,
+body.light .stat-number,
+body.light .logo {
+    color: #1d4e89 !important; 
+    -webkit-text-fill-color: #1d4e89 !important;
+    background: none !important;
+}
+
+body.light .tagline, 
+body.light .stat-label, 
+body.light footer {
+    color: #4a5568 !important;
+}
+
+body.light .member-card {
+    background: #ffffff !important;
+    border: 1px solid #dee2e6 !important;
+}
+
+body.light .member-name { 
+    color: #1a202c !important; 
+}
+
+body.light #members-count {
+    color: #4a5568 !important;
+    font-weight: 600 !important;
+}
 
         .container {
             max-width: 800px;
@@ -306,6 +354,31 @@
 
     <script src="members.js"></script>
     <script>
+        // Theme toggle: persist choice and update UI
+        (function () {
+            const toggleBtn = document.getElementById('theme-toggle');
+
+            function applyTheme(theme) {
+                if (theme === 'light') {
+                    document.body.classList.add('light');
+                    toggleBtn.textContent = '🌙';
+                } else {
+                    document.body.classList.remove('light');
+                    toggleBtn.textContent = '☀️';
+                }
+            }
+
+            // Initialize theme from localStorage (default: dark)
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(savedTheme);
+
+            toggleBtn.addEventListener('click', function () {
+                const isLight = document.body.classList.contains('light');
+                const newTheme = isLight ? 'dark' : 'light';
+                applyTheme(newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+        })();
         function updateDaysCounter() {
             const startDate = new Date('2026-01-21'); 
             const today = new Date();
